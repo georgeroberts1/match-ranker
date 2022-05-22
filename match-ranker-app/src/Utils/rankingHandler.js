@@ -20,12 +20,18 @@ const getRankingData = (fixtureData) => {
   const tableData = getSessionData("tableData");
   const teamData = getSessionData("teamData");
 
+  // Theory: Teams closer together should have closer games
   const tableProximity = getTableProximity(
     tableData[homeTeamID].position,
     tableData[awayTeamID].position
   );
 
-  const ranking = getWeightedRanking(tableProximity);
+  // Theory: Teams with higher table positions (equates to smallest number)
+  // are better teams
+  const combinedTablePosition =
+    tableData[homeTeamID].position + tableData[awayTeamID].position;
+
+  const ranking = getWeightedRanking(tableProximity, combinedTablePosition);
 
   return { ranking: ranking };
 };
