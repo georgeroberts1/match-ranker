@@ -102,3 +102,7 @@ dist
 
 # TernJS port file
 .tern-port
+
+# MY IGNORED FILES
+React-Football/
+cors-server/

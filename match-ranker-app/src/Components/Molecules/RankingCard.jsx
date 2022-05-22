@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const RankingCardStyle = styled.div`
+const FixtureCard = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -25,8 +25,13 @@ const RankingBlockStyle = styled.div`
 `
 
 const RankingCard = props => {
+    // console.log(props)
+    const isGameFinished = props.status === "Finished"
     return (
-        <RankingCardStyle>
+        <>
+        {isGameFinished &&
+        <FixtureCard>
+            <h3></h3>
             <RankingBlockStyle>
                 <RankingHeaderStyled>Match Rank</RankingHeaderStyled>
                 <br />
@@ -37,7 +42,16 @@ const RankingCard = props => {
                 Sum of Table Positions: {props.rankingData.combinedTablePosition} <br />
                 Gap Between Table Position: {props.rankingData.tableProximity} <br />
             </RankingBlockStyle>
-        </RankingCardStyle>
+        </FixtureCard>
+        }
+
+        {!isGameFinished && 
+            <FixtureCard>
+                <h2>GAME OVER</h2>
+                Winner: {props.score.winner}
+            </FixtureCard>
+        }
+        </>
     )
 }
 

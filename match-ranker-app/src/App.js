@@ -1,4 +1,4 @@
-import FixtureList from "./Components/FixtureList";
+import FixtureList from "./Components/Pages/FixtureList";
 import styled from "styled-components";
 
 const AppStyled = styled.div`

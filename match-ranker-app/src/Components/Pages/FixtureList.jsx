@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import getPlTeamData from "../Services/getPlTeamData";
-import getPlFixtureData from "../Services/getPlFixtureData";
-import FixtureRow from "./FixtureRow";
-import getPlTableData from "../Services/getPlTableData";
-import getRankingData from '../Utils/rankingHandler'
-import { setSessionData, getSessionData } from '../Utils/sessionStorage'
+import getPlTeamData from "../../Services/getPlTeamData";
+import getPlFixtureData from "../../Services/getPlFixtureData";
+import FixtureRow from "../Organisms/FixtureRow";
+import getPlTableData from "../../Services/getPlTableData";
+import getRankingData from '../../Utils/rankingHandler'
+import { setSessionData, getSessionData } from '../../Utils/sessionStorage'
 import styled from "styled-components";
 
 const FixtureListStyled = styled.div`
