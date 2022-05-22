@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import getPlTeamData from "../Services/getPlTeamData";
 import getPlFixtureData from "../Services/getPlFixtureData";
@@ -6,6 +5,11 @@ import FixtureRow from "./FixtureRow";
 import getPlTableData from "../Services/getPlTableData";
 import getRankingData from '../Utils/rankingHandler'
 import { setSessionData, getSessionData } from '../Utils/sessionStorage'
+import styled from "styled-components";
+
+const FixtureListStyled = styled.div`
+  width: 70%;
+`
 
 function FixtureList() {
   const [plPositions, setPlPositions] = useState([]);
@@ -38,6 +42,7 @@ function FixtureList() {
         setState(data);
       });
     } else {
+      console.log(sessionData)
       setState(sessionData)
     }
   }
@@ -57,7 +62,9 @@ function FixtureList() {
     tableData: plPositions,
   }
 
-  return (plFixturesRanked.map(fixture => <FixtureRow key={fixture.id} {...fixture} {...teamsData} />));
+  return <FixtureListStyled>
+    {plFixturesRanked.map(fixture => <FixtureRow key={fixture.id} {...fixture} {...teamsData} />)}
+  </FixtureListStyled>
 }
 
 export default FixtureList;

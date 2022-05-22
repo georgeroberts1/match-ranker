@@ -6,7 +6,7 @@ const FixtureRowStyled = styled.div`
     display: flex;
     align-items: center; 
     width: 100%;
-    border: solid 1px;
+    border-top: 0.1em solid black;
     background-color: #FFF;
 `
 const getTeamData = (props, homeOrAway) => {
