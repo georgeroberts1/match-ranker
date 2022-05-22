@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { removeFC } from '../../Utils/general'
 
 const TeamLogo = styled.img`
     object-fit: contain;
@@ -14,10 +15,6 @@ const TeamCardStyled = styled.div`
 `
 
 const TeamCard = props => {
-    const removeFC = (teamName) => {
-        return teamName.replace('FC', '')
-    }
-
     return (
         <TeamCardStyled>
             <TeamLogo src={props.teamData.crestUrl} alt={removeFC(props.teamData.name)} />

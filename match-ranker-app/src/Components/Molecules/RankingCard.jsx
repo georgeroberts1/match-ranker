@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { removeFC } from '../../Utils/general'
 
 const FixtureCard = styled.div`
     display: flex;
@@ -16,7 +17,7 @@ const RankingHeaderStyled = styled.span`
     font-size: 30px;
 `
 
-const RankingStyled = styled.span`
+const BigNumberStyled = styled.span`
     font-size: 30px;
     font-weight: 800;
 `
@@ -35,7 +36,7 @@ const RankingCard = props => {
             <RankingBlockStyle>
                 <RankingHeaderStyled>Match Rank</RankingHeaderStyled>
                 <br />
-                <RankingStyled>{props.rankingData.ranking || 'Unranked'}</RankingStyled>
+                <BigNumberStyled>{props.rankingData.ranking || 'Unranked'}</BigNumberStyled>
             </RankingBlockStyle>
             <RankingBlockStyle>
                 Combined Goal Difference: {props.rankingData.combinedGoalDifference} <br />
@@ -47,8 +48,13 @@ const RankingCard = props => {
 
         {!isGameFinished && 
             <FixtureCard>
-                <h2>GAME OVER</h2>
-                Winner: {props.score.winner}
+                <BigNumberStyled>
+                    {props.score.fullTime.homeTeam}
+                </BigNumberStyled>
+                {props.score.winner === "HOME_TEAM" ? removeFC(props.homeTeamData.name) : removeFC(props.awayTeamData.name)} <br />
+                <BigNumberStyled>
+                    {props.score.fullTime.awayTeam}
+                </BigNumberStyled>
             </FixtureCard>
         }
         </>
