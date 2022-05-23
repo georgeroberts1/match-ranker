@@ -18,12 +18,16 @@ export const getCombinedTablePositionWeight = (combinedTablePosition) => {
   return weightOutOf100(minCombined, maxCombined, combinedTablePosition, true);
 };
 
-export const getCombinedGoalDifferenceWeight = (combinedGoalDifference) => {
+export const getCombinedGoalDifferenceWeight = (goalDifferenceData) => {
+  const {
+    minGoalDifferenceCombined,
+    maxGoalDifferenceCombined,
+    combinedGoalDifference,
+  } = goalDifferenceData;
+
   return weightOutOf100(
-    // lowestCombinedGoalDifference,
-    // highestCombinedGoalDifference,
-    -98,
-    138,
+    minGoalDifferenceCombined,
+    maxGoalDifferenceCombined,
     combinedGoalDifference,
     false
   );
@@ -35,7 +39,7 @@ export const getWeightAverage = (...weights) => {
 };
 
 export const getWeightedRanking = (rankingDataPoints) => {
-  const { tableProximity, combinedTablePosition, combinedGoalDifference } =
+  const { tableProximity, combinedTablePosition, combinedGoalDifferenceData } =
     rankingDataPoints;
 
   // Assume for now all weights have equal value
@@ -44,7 +48,7 @@ export const getWeightedRanking = (rankingDataPoints) => {
     combinedTablePosition
   );
   const combinedGoalDifferenceWeight = getCombinedGoalDifferenceWeight(
-    combinedGoalDifference
+    combinedGoalDifferenceData
   );
 
   return getWeightAverage(

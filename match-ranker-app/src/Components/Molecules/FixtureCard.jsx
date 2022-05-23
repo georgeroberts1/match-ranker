@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { removeFC } from '../../Utils/general'
 
-const FixtureCard = styled.div`
+const FixtureCardStyled = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -24,41 +24,67 @@ const BigNumberStyled = styled.span`
 
 const RankingBlockStyle = styled.div`
 `
+const TableStyled = styled.table`
+    width: 100%;
+    td {
+        width: 50%;
+    }
+`
 
-const RankingCard = props => {
+const LabelTD = styled.td`
+    text-align: right;
+    font-weight: bold;
+`
+
+const getTableRow = (label, value) => {
+    return <tr>
+                <LabelTD>
+                    {label}:
+                </LabelTD>
+                <td>
+                    {value}
+                </td>
+            </tr>
+}
+
+const FixtureCard = props => {
     // console.log(props)
     const isGameFinished = props.status === "Finished"
     return (
         <>
         {isGameFinished &&
-        <FixtureCard>
-            <h3></h3>
+        <FixtureCardStyled>
             <RankingBlockStyle>
                 <RankingHeaderStyled>Match Rank</RankingHeaderStyled>
                 <br />
                 <BigNumberStyled>{props.rankingData.ranking || 'Unranked'}</BigNumberStyled>
             </RankingBlockStyle>
             <RankingBlockStyle>
-                Combined Goal Difference: {props.rankingData.combinedGoalDifference} <br />
+                Combined Goal Difference: {props.rankingData.combinedGoalDifferenceData.combinedGoalDifference} <br />
                 Sum of Table Positions: {props.rankingData.combinedTablePosition} <br />
                 Gap Between Table Position: {props.rankingData.tableProximity} <br />
             </RankingBlockStyle>
-        </FixtureCard>
+        </FixtureCardStyled>
         }
 
         {!isGameFinished && 
-            <FixtureCard>
+            <FixtureCardStyled>
                 <BigNumberStyled>
                     {props.score.fullTime.homeTeam}
                 </BigNumberStyled>
-                {props.score.winner === "HOME_TEAM" ? removeFC(props.homeTeamData.name) : removeFC(props.awayTeamData.name)} <br />
+                
+                <TableStyled>
+                    {getTableRow('Winner', props.score.winner === "HOME_TEAM" ? removeFC(props.homeTeamData.name) : removeFC(props.awayTeamData.name))}
+                    {getTableRow('Match Ranking', props.rankingData.ranking || 'Unranked')}
+                </TableStyled>
+
                 <BigNumberStyled>
                     {props.score.fullTime.awayTeam}
                 </BigNumberStyled>
-            </FixtureCard>
+            </FixtureCardStyled>
         }
         </>
     )
 }
 
-export default RankingCard
+export default FixtureCard

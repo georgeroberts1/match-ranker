@@ -1,5 +1,5 @@
 import TeamCard from "../Molecules/TeamCard"
-import RankingCard from "../Molecules/RankingCard"
+import FixtureCard from "../Molecules/FixtureCard"
 import styled from "styled-components"
 
 const FixtureRowStyled = styled.div`
@@ -28,7 +28,7 @@ const FixtureRow = props => {
     // console.log(props)
     const homeTeamData = getTeamData(props, 'homeTeam')
     const awayTeamData = getTeamData(props, 'awayTeam')
-    const rankingCardProps = {
+    const fixtureCardProps = {
         awayTeamData,
         homeTeamData,
         rankingData: props.rankingData,
@@ -36,7 +36,7 @@ const FixtureRow = props => {
         status: props.status,
         utcDate: props.utcDate
     }
-    return <FixtureRowStyled><TeamCard {...homeTeamData} /><RankingCard {...rankingCardProps} /> <TeamCard {...awayTeamData} /></FixtureRowStyled>
+    return <FixtureRowStyled><TeamCard {...homeTeamData} /><FixtureCard {...fixtureCardProps} /> <TeamCard {...awayTeamData} /></FixtureRowStyled>
 }
 
 export default FixtureRow

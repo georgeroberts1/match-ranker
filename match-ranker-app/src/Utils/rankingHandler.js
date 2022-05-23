@@ -31,14 +31,33 @@ const getRankingData = (fixtureData) => {
   const combinedTablePosition =
     tableData[homeTeamID].position + tableData[awayTeamID].position;
 
-  const combinedGoalDifference =
-    // TODO: Calculate lowest/highest combined goal difference and pass in here as object
-    tableData[homeTeamID].goalDifference + tableData[awayTeamID].goalDifference;
+  const getCombinedGoalDifferenceData = () => {
+    let minGoalDifferenceCombined = 0;
+    let maxGoalDifferenceCombined = 0;
+    const topTwo = Object.values(tableData)
+      .filter((team) => (team.position <= 2 ? team : null))
+      .forEach((team) => (maxGoalDifferenceCombined += team.goalDifference));
+    const bottomTwo = Object.values(tableData)
+      .filter((team) => (team.position >= 19 ? team : null))
+      .forEach((team) => (minGoalDifferenceCombined += team.goalDifference));
+
+    const combinedGoalDifference =
+      tableData[homeTeamID].goalDifference +
+      tableData[awayTeamID].goalDifference;
+
+    return {
+      minGoalDifferenceCombined,
+      maxGoalDifferenceCombined,
+      combinedGoalDifference,
+    };
+  };
+
+  const combinedGoalDifferenceData = getCombinedGoalDifferenceData();
 
   const rankingDataPoints = {
     tableProximity,
     combinedTablePosition,
-    combinedGoalDifference,
+    combinedGoalDifferenceData,
   };
 
   const rankingWeight = getWeightedRanking(rankingDataPoints);

@@ -31,22 +31,28 @@ import {
 //   expect(getCombinedTablePositionWeight(3)).toBe(100);
 // });
 
-// test("returns weight based on mid range combined goal difference", () => {
-//   expect(getCombinedGoalDifferenceWeight(-4)).toBe(40);
-// });
-
-test("Aggregate weight function returns 63 for 3 given weights", () => {
-  // 89+61+40/3 = 63
-  expect(getWeightAverage(89, 61, 40)).toBe(63);
-});
-
-test("Aggregate weight function returns 63 for 3 given weights", () => {
-  // 3->89 17->61 -4->40
+test("returns weight based on mid range combined goal difference", () => {
   expect(
-    getWeightedRanking({
-      tableProximity: 3,
-      combinedTablePosition: 17,
+    getCombinedGoalDifferenceWeight({
+      minGoalDifferenceCombined: -104,
+      maxGoalDifferenceCombined: 141,
       combinedGoalDifference: -4,
     })
-  ).toBe(63);
+  ).toBe(41);
 });
+
+// test("Aggregate weight function returns 63 for 3 given weights", () => {
+//   // 89+61+40/3 = 63
+//   expect(getWeightAverage(89, 61, 40)).toBe(63);
+// });
+
+// test("Aggregate weight function returns 63 for 3 given weights", () => {
+//   // 3->89 17->61 -4->40
+//   expect(
+//     getWeightedRanking({
+//       tableProximity: 3,
+//       combinedTablePosition: 17,
+//       combinedGoalDifference: -4,
+//     })
+//   ).toBe(63);
+// });
